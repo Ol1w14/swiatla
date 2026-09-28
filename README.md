@@ -1,14 +1,13 @@
 🚦 Sygnalizacja świetlna LED
-
-Projekt przedstawia prostą symulację sygnalizacji świetlnej z wykorzystaniem Arduino oraz 8 diod LED — po dwie dla każdego z 4 kierunków.
-
 📋 Opis projektu
+
+Projekt przedstawia prostą symulację sygnalizacji świetlnej z wykorzystaniem Arduino oraz 8 diod LED.
 
 Układ składa się z 4 zestawów świateł:
 
-🔴 czerwone
+🔴 Czerwona
 
-🟢 zielone
+🟢 Zielona
 
 Sygnalizacja działa naprzemiennie:
 
@@ -34,9 +33,7 @@ Kierunek	LED czerwona	LED zielona
 
 🟢 Zielone światło: 5 sekund
 
-🔴 Zmiana świateł: 1 sekunda
-
-Następnie zielone otrzymują przeciwne kierunki.
+🔄 Zmiana świateł: 1 sekunda
 
 🛠️ Wymagane elementy
 
@@ -48,9 +45,9 @@ Arduino
 
 8 × rezystorów
 
-płytka stykowa
+Płytka stykowa
 
-przewody połączeniowe
+Przewody połączeniowe
 
 💻 Kod
 
@@ -77,24 +74,25 @@ Wgraj program na Arduino.
 Obserwuj działanie sygnalizacji.
 
 🔄 Schemat działania
-┌─────────────────────────────┐
-│ Kierunek 1 🟢   Kierunek 3 🟢 │
-│ Kierunek 2 🔴   Kierunek 4 🔴 │
-└──────────────┬──────────────┘
-               │ 5 s
-               ▼
-          Zmiana 1 s
-               │
-               ▼
-┌─────────────────────────────┐
-│ Kierunek 1 🔴   Kierunek 3 🔴 │
-│ Kierunek 2 🟢   Kierunek 4 🟢 │
-└──────────────┬──────────────┘
-               │ 5 s
-               ▼
-          Zmiana 1 s
-               │
-               └──────► powtórzenie
+Kierunek 1 🟢    Kierunek 3 🟢
+Kierunek 2 🔴    Kierunek 4 🔴
+
+          ↓ 5 sekund
+
+        Zmiana 1 sek.
+
+          ↓
+
+Kierunek 1 🔴    Kierunek 3 🔴
+Kierunek 2 🟢    Kierunek 4 🟢
+
+          ↓ 5 sekund
+
+        Zmiana 1 sek.
+
+          ↓
+
+       Powtórzenie
 
 📁 Struktura projektu
 sygnalizacja-led/
