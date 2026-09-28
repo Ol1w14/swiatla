@@ -94,12 +94,3 @@ Kierunek 2 🟢    Kierunek 4 🟢
 
        Powtórzenie
 
-📁 Struktura projektu
-sygnalizacja-led/
-│
-├── sygnalizacja-led.ino
-└── README.md
-
-📜 Licencja
-
-Projekt został wykonany w celach edukacyjnych.
