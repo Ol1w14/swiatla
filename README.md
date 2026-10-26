@@ -1,92 +1,93 @@
-🚦 Sygnalizacja świetlna LED
-📋 Opis projektu
+# 🚦 Inteligentna sygnalizacja świetlna z czujnikami PIR
 
-Projekt przedstawia prostą symulację sygnalizacji świetlnej z wykorzystaniem Arduino oraz 8 diod LED.
+## 📌 Opis projektu
 
-🚦 Działanie
+Projekt przedstawia system sygnalizacji świetlnej oparty na Arduino Uno oraz czterech czujnikach ruchu PIR. Każdy czujnik jest przypisany do osobnej sygnalizacji składającej się z czerwonej i zielonej diody LED.
 
-Sygnalizacja działa naprzemiennie:
+Głównym celem projektu jest wykrywanie ruchu i automatyczne przełączanie świateł odpowiedniego kierunku na zielone, podczas gdy pozostałe kierunki mają światło czerwone.
 
-Kierunek 1 i 3 mają światło zielone.
+## 🛠️ Wykorzystane komponenty
 
-Kierunek 2 i 4 mają światło czerwone.
+- Arduino Uno
+- 4 czujniki ruchu PIR
+- 4 czerwone diody LED
+- 4 zielone diody LED
+- Rezystory ograniczające prąd diod LED
+- Przewody połączeniowe
+- Tinkercad Circuits
 
-Następuje zmiana świateł.
+## 🔌 Podłączenie elementów
 
-Kierunek 2 i 4 otrzymują światło zielone.
+### Diody LED
 
-Kierunek 1 i 3 otrzymują światło czerwone.
+| Kierunek | Czerwona LED | Zielona LED |
+|---|---|---|
+| 1 | Pin 3 | Pin 2 |
+| 2 | Pin 5 | Pin 4 |
+| 3 | Pin 7 | Pin 6 |
+| 4 | Pin 9 | Pin 8 |
 
-Cykl powtarza się w nieskończoność.
+### Czujniki PIR
 
-🔌 Podłączenie
-💡 Piny LED
-Kierunek	LED czerwona	LED zielona
-1	Pin 2	Pin 3
-2	Pin 4	Pin 5
-3	Pin 6	Pin 7
-4	Pin 8	Pin 9
-⏱️ Czas działania
-🟢 Zielone światło
+| Czujnik | Pin Arduino |
+|---|---|
+| Czujnik 1 | 10 |
+| Czujnik 2 | 11 |
+| Czujnik 3 | 12 |
+| Czujnik 4 | 13 |
 
-Czas świecenia: 5 sekund
+Każdy czujnik PIR powinien być podłączony do zasilania, masy (GND) oraz odpowiedniego pinu sygnałowego Arduino.
 
-🔄 Zmiana świateł
+## ⚙️ Zasada działania
 
-Czas zmiany: 1 sekunda
+1. Po uruchomieniu programu wszystkie kierunki mają czerwone światło.
+2. Arduino stale odczytuje sygnały z czujników PIR.
+3. Wykrycie zmiany sygnału z `LOW` na `HIGH` oznacza nowe zdarzenie ruchu.
+4. Kierunek przypisany do aktywnego czujnika otrzymuje zielone światło.
+5. Pozostałe kierunki mają czerwone światło.
+6. Zielone światło pozostaje aktywne do momentu wykrycia nowego zdarzenia przez inny czujnik.
+7. Jeśli nie zostanie wykryty kolejny ruch, ostatni stan sygnalizacji zostaje zachowany.
 
-🛠️ Wymagane elementy
-📦 Lista elementów
+## 💻 Zastosowane funkcje
 
-Arduino
+- `pinMode()` – ustawia piny Arduino jako wejścia lub wyjścia.
+- `digitalRead()` – odczytuje stan czujników PIR.
+- `digitalWrite()` – steruje diodami LED.
+- `setup()` – inicjalizuje piny i ustawia początkowe światła.
+- `loop()` – stale sprawdza stan czujników.
+- `RISING` – oznacza przejście sygnału z `LOW` na `HIGH`, wykrywane w projekcie przez porównanie bieżącego i poprzedniego stanu czujnika.
+- `delay(20)` – wprowadza krótką przerwę między odczytami.
 
-4 × czerwona dioda LED
+## 🧠 Logika programu
 
-4 × zielona dioda LED
+Program zapamiętuje poprzedni stan każdego czujnika w zmiennych `poprzedni1`, `poprzedni2`, `poprzedni3` i `poprzedni4`.
 
-8 × rezystorów
+Reakcja następuje tylko wtedy, gdy sygnał zmieni się z `LOW` na `HIGH`. Dzięki temu światła nie przełączają się wielokrotnie, gdy czujnik przez pewien czas utrzymuje stan `HIGH`.
 
-Płytka stykowa
+Funkcja `wszystkieCzerwone()` ustawia wszystkie kierunki na czerwono, a `zieloneSwiatlo(nr)` aktywuje zielone światło wybranego kierunku i wyłącza jego światło czerwone.
 
-Przewody połączeniowe
+## ▶️ Uruchomienie projektu
 
-💻 Kod
-🧑‍💻 Wykorzystane funkcje
+1. Otwórz projekt w Tinkercad Circuits.
+2. Sprawdź poprawność połączeń.
+3. Wklej kod do edytora Arduino.
+4. Kliknij **Start Simulation**.
+5. Zasymuluj wykrycie ruchu przez poszczególne czujniki PIR.
+6. Obserwuj zmianę świateł.
 
-Program został napisany w języku C++ dla Arduino.
+## ⚠️ Uwagi
 
-pinMode()
-digitalWrite()
-delay()
+- Jeśli kilka czujników wykryje ruch jednocześnie, pierwszeństwo ma pierwszy aktywny czujnik według kolejności sprawdzania: 1, 2, 3, 4.
+- Światła nie zmieniają się automatycznie co określony czas.
+- Ostatni stan sygnalizacji zostaje zachowany do wykrycia kolejnego zdarzenia ruchu.
+- W rzeczywistym układzie należy stosować odpowiednie rezystory przy diodach LED i prawidłowo podłączyć czujniki PIR.
 
-▶️ Uruchomienie
-📌 Instrukcja
+## 🎯 Cel projektu
 
-Podłącz diody LED zgodnie z tabelą.
+Celem projektu jest poznanie obsługi czujników ruchu PIR, sterowania diodami LED oraz wykrywania zmian stanów logicznych w Arduino. Projekt pokazuje, jak stworzyć prostą sygnalizację reagującą na ruch.
 
-Otwórz kod w Arduino IDE.
+## 👨‍💻 Technologie
 
-Wybierz odpowiednią płytkę Arduino.
-
-Wybierz właściwy port COM.
-
-Wgraj program na Arduino.
-
-Obserwuj działanie sygnalizacji.
-
-🔄 Schemat działania
-🚦 Cykl 1
-Kierunek 1 🟢    Kierunek 3 🟢
-Kierunek 2 🔴    Kierunek 4 🔴
-
-🔄 Zmiana
-Zmiana świateł - 1 sekunda
-
-🚦 Cykl 2
-Kierunek 1 🔴    Kierunek 3 🔴
-Kierunek 2 🟢    Kierunek 4 🟢
-
-🔁 Powtórzenie
-
-Po zakończeniu drugiego cyklu program wraca do pierwszego i cały proces jest powtarzany.
-
+- Arduino C/C++
+- Arduino Uno
+- Tinkercad Circuits
