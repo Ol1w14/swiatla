@@ -1,0 +1,108 @@
+
+int czerwone1 = 3;
+int zielone1 = 2;
+
+int czerwone2 = 5;
+int zielone2 = 4;
+
+int czerwone3 = 7;
+int zielone3 = 6;
+
+int czerwone4 = 9;
+int zielone4 = 8;
+
+int czujnik1 = 10;
+int czujnik2 = 11;
+int czujnik3 = 12;
+int czujnik4 = 13;
+
+int stan1 = LOW;
+int stan2 = LOW;
+int stan3 = LOW;
+int stan4 = LOW;
+
+int poprzedni1 = LOW;
+int poprzedni2 = LOW;
+int poprzedni3 = LOW;
+int poprzedni4 = LOW;
+
+void setup() {
+  pinMode(czerwone1, OUTPUT);
+  pinMode(zielone1, OUTPUT);
+  pinMode(czerwone2, OUTPUT);
+  pinMode(zielone2, OUTPUT);
+  pinMode(czerwone3, OUTPUT);
+  pinMode(zielone3, OUTPUT);
+  pinMode(czerwone4, OUTPUT);
+  pinMode(zielone4, OUTPUT);
+
+  pinMode(czujnik1, INPUT);
+  pinMode(czujnik2, INPUT);
+  pinMode(czujnik3, INPUT);
+  pinMode(czujnik4, INPUT);
+
+  wszystkieCzerwone();
+}
+
+void wszystkieCzerwone() {
+  digitalWrite(czerwone1, HIGH);
+  digitalWrite(czerwone2, HIGH);
+  digitalWrite(czerwone3, HIGH);
+  digitalWrite(czerwone4, HIGH);
+
+  digitalWrite(zielone1, LOW);
+  digitalWrite(zielone2, LOW);
+  digitalWrite(zielone3, LOW);
+  digitalWrite(zielone4, LOW);
+}
+
+void zieloneSwiatlo(int nr) {
+  wszystkieCzerwone();
+
+  if (nr == 1) {
+    digitalWrite(czerwone1, LOW);
+    digitalWrite(zielone1, HIGH);
+  }
+  else if (nr == 2) {
+    digitalWrite(czerwone2, LOW);
+    digitalWrite(zielone2, HIGH);
+  }
+  else if (nr == 3) {
+    digitalWrite(czerwone3, LOW);
+    digitalWrite(zielone3, HIGH);
+  }
+  else if (nr == 4) {
+    digitalWrite(czerwone4, LOW);
+    digitalWrite(zielone4, HIGH);
+  }
+}
+
+void loop() {
+  // CHANGE: sprawdzamy zmianę stanu czujnika
+  stan1 = digitalRead(czujnik1);
+  stan2 = digitalRead(czujnik2);
+  stan3 = digitalRead(czujnik3);
+  stan4 = digitalRead(czujnik4);
+
+  // RISING: reakcja tylko na zmianę LOW -> HIGH
+  if (stan1 == HIGH && poprzedni1 == LOW) {
+    zieloneSwiatlo(1);
+  }
+  else if (stan2 == HIGH && poprzedni2 == LOW) {
+    zieloneSwiatlo(2);
+  }
+  else if (stan3 == HIGH && poprzedni3 == LOW) {
+    zieloneSwiatlo(3);
+  }
+  else if (stan4 == HIGH && poprzedni4 == LOW) {
+    zieloneSwiatlo(4);
+  }
+
+  // Zapamiętujemy stany do następnego sprawdzenia
+  poprzedni1 = stan1;
+  poprzedni2 = stan2;
+  poprzedni3 = stan3;
+  poprzedni4 = stan4;
+
+  delay(20);
+}
